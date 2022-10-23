@@ -1,11 +1,11 @@
 import { prisma } from '@/config';
 
-async function findMany() {
-  return prisma.ticket.findMany();
+async function findModalities() {
+  return prisma.modality.findMany();
 }
 
 const paymentRepository = {
-  findMany,
+  findModalities,
 };
 
 export default paymentRepository;

@@ -1,16 +1,16 @@
 import { notFoundError } from '@/errors';
 import paymentRepository from '@/repositories/payment-repository';
-import { Ticket } from '@prisma/client';
+import { Modality } from '@prisma/client';
 
-async function getTickets(): Promise<Ticket[]> {
-  const ticket = await paymentRepository.findMany();
-  if (!ticket) throw notFoundError();
+async function getModalities(): Promise<Modality[]> {
+  const modalities = await paymentRepository.findModalities();
+  if (!modalities) throw notFoundError();
 
-  return ticket;
+  return modalities;
 }
 
 const paymentService = {
-  getTickets,
+  getModalities,
 };
 
 export default paymentService;
