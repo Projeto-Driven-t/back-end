@@ -32,7 +32,7 @@
     "dev:seed": "npm run dev:compose -- run drivent-development npm run dev:load-envs prisma db seed",
     "dev:docker": "npm run dev:compose -- up",
     "dev:docker:down": "npm run dev:compose -- down",
-    "dev": "NODE_ENV=development nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register ./src/server.ts' -e ts",
+    "dev": "cross-env NODE_ENV=development nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register ./src/server.ts' -e ts",
     "ci:build": "docker-compose -f docker-compose.test.yml build",
     "ci:test": "docker-compose -f docker-compose.test.yml run drivent-test bash -c 'npm run test:migration:run && npm test'"
   },
@@ -87,6 +87,7 @@
     "@prisma/client": "^3.14.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dayjs": "^1.11.2",
     "dotenv": "^16.0.1",
     "dotenv-expand": "^8.0.3",
