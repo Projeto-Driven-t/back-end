@@ -68,12 +68,31 @@ model Address {
   updatedAt     DateTime   @updatedAt
 }
 
-model Ticket {
+model Modality {
+  id        Int      @id @default(autoincrement())
+  modality  String
+  price     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Ticket    Ticket[]
+}
+
+model Accommodation {
   id            Int      @id @default(autoincrement())
-  modalitytype  String
-  modalityPrice Float
-  accommodation String?
-  hostingPrice  Float?
+  accommodation String
+  price         Float
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+  Ticket        Ticket[]
+}
+
+model Ticket {
+  id              Int           @id @default(autoincrement())
+  modalityId      Int           @unique
+  Modality        Modality      @relation(fields: [modalityId], references: [id])
+  accommodationId Int           @unique
+  Accmodation     Accommodation @relation(fields: [accommodationId], references: [id])
+  totalValue      Float
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
 }

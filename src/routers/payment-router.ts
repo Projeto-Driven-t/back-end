@@ -4,6 +4,6 @@ import { Router } from 'express';
 
 const paymentRouter = Router();
 
-paymentRouter.all('/*', authenticateToken).get('/', getTickets);
+paymentRouter.get('/', getTickets);
 
 export { paymentRouter };
