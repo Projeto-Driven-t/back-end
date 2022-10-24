@@ -70,15 +70,16 @@ model Address {
 }
 
 model Payment {
-  id           Int         @id @default(autoincrement())
-  cardNumber   String      @db.VarChar(255)
-  name         String      @db.VarChar(255)
-  validThru    String      @db.VarChar(255)
-  value        String      @db.VarChar(255)
-  userId       Int
-  User         User        @relation(fields: [userId], references: [id])
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  id             Int      @id @default(autoincrement())
+  name           String   @db.VarChar(255)
+  cardNumber     String   @db.VarChar(255)
+  expirationDate String   @db.VarChar(255)
+  cvv            String   @db.VarChar(255)
+  totalValue     String   @db.VarChar(255)
+  userId         Int
+  User           User     @relation(fields: [userId], references: [id])
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 
 model Modality {
