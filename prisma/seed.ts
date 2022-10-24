@@ -28,6 +28,18 @@ async function main() {
     })
   }
 
+  let accommodation = await prisma.accommodation.findFirst();
+
+  if(!accommodation) {
+    await prisma.accommodation.create({
+      data: {accommodation: "Com Hotel", price: 500}
+    })
+
+    await prisma.accommodation.create({
+      data: {accommodation: "Sem Hotel", price: 0}
+    })
+  }
+
   console.log({modality})
   console.log({ event });
 }
