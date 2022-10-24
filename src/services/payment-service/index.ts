@@ -1,6 +1,6 @@
 import { notFoundError } from '@/errors';
 import paymentRepository from '@/repositories/payment-repository';
-import { Modality } from '@prisma/client';
+import { Accommodation, Modality } from '@prisma/client';
 
 async function getModalities(): Promise<Modality[]> {
   const modalities = await paymentRepository.findModalities();
@@ -9,8 +9,16 @@ async function getModalities(): Promise<Modality[]> {
   return modalities;
 }
 
+async function getAccommodations(): Promise<Accommodation[]> {
+  const accommodations = await paymentRepository.findAccommodations();
+  if (!accommodations) throw notFoundError();
+
+  return accommodations;
+}
+
 const paymentService = {
   getModalities,
+  getAccommodations,
 };
 
 export default paymentService;
