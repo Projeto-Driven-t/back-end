@@ -13,19 +13,19 @@ export async function getAccommodations(req: AuthenticatedRequest, res: Response
   return res.status(httpStatus.OK).send(accommodations);
 }
 
-export async function getPayment(req: AuthenticatedRequest, res: Response) {
+export async function checksThePayment(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
-  
-  await paymentService.getPayment(userId);
 
-  return res.status(httpStatus.OK).send("ok");
+  await paymentService.checksThePayment(userId);
+
+  return res.status(httpStatus.OK).send('ok');
 }
 
 export async function payment(req: AuthenticatedRequest, res: Response) {
-  const card = req.body;
+  const paymentData = req.body;
   const { userId } = req;
 
-  await paymentService.payment(card, userId)
+  await paymentService.payment(paymentData, userId);
 
-  return res.status(httpStatus.OK).send("ok");
+  return res.status(httpStatus.OK).send('ok');
 }

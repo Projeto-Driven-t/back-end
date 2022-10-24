@@ -18,14 +18,14 @@ async function main() {
 
   let modality = await prisma.modality.findMany();
 
-  if(!modality) {
+  if (!modality) {
     await prisma.modality.create({
-      data: { modality: "Online", price: 100 }
-    })
+      data: { modality: 'Online', price: 100 },
+    });
 
     await prisma.modality.create({
-      data: { modality: "Presencial", price: 350 }
-    })
+      data: { modality: 'Presencial', price: 350 },
+    });
   }
 
   let accommodation = await prisma.accommodation.findFirst();
@@ -40,8 +40,8 @@ async function main() {
     })
   }
 
-  console.log({modality})
   console.log({ event });
+  console.log({ modality });
 }
 
 main()

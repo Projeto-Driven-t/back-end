@@ -1,25 +1,5 @@
 import { prisma } from '@/config';
-import { CreatePaymentParams } from '@/services/payment-service';
-
-async function findFirst(userId: number) {
-    return prisma.payment.findFirst({
-        where: {
-            userId: userId
-        }
-    });
-}
-
-async function create(card: CreatePaymentParams, userId: number) {
-  return prisma.payment.create({
-    data: {
-        cardNumber: card.cardNumber,
-        name: card.name,
-        value: '12',
-        validThru: card.validThru,
-        userId: userId
-    }
-  });
-}
+import { Payment } from '@prisma/client';
 
 async function findModalities() {
   return prisma.modality.findMany();
@@ -29,8 +9,22 @@ async function findAccommodations() {
   return prisma.accommodation.findMany();
 }
 
+async function findFirst(userId: number) {
+  return prisma.payment.findFirst({
+    where: { userId },
+  });
+}
+
+async function create(payment: CreatePaymentParams, userId: number) {
+  return prisma.payment.create({
+    data: { ...payment, userId: userId },
+  });
+}
+
+export type CreatePaymentParams = Omit<Payment, 'id' | 'userId' | 'createdAt' | 'updatedAt'>;
+
 const paymentRepository = {
- create,
+  create,
   findFirst,
   findModalities,
   findAccommodations,
