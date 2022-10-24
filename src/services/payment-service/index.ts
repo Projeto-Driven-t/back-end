@@ -1,6 +1,22 @@
-import paymentRepository from '@/repositories/payment-repository/index';
-import { Payment } from '@prisma/client';
+import { notFoundError } from '@/errors';
+import paymentRepository from '@/repositories/payment-repository';
+import { Accommodation, Modality, Payment } from '@prisma/client';
+
 export type CreatePaymentParams = Pick<Payment, 'cardNumber'|'name'|'validThru'>;
+
+async function getModalities(): Promise<Modality[]> {
+  const modalities = await paymentRepository.findModalities();
+  if (!modalities) throw notFoundError();
+
+  return modalities;
+}
+
+async function getAccommodations(): Promise<Accommodation[]> {
+  const accommodations = await paymentRepository.findAccommodations();
+  if (!accommodations) throw notFoundError();
+
+  return accommodations;
+}
 
 async function getPayment(userId: number) {
     const findPayment = await paymentRepository.findFirst(userId)
@@ -14,8 +30,10 @@ async function payment(card: CreatePaymentParams, userId: number) {
 }
 
 const paymentService = {
-    payment,
-    getPayment
-  };
-  
+  payment,
+  getPayment
+  getModalities,
+  getAccommodations,
+};
+
 export default paymentService;

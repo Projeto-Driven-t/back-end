@@ -6,7 +6,7 @@ async function findFirst(userId: number) {
         where: {
             userId: userId
         }
-    })
+    });
 }
 
 async function create(card: CreatePaymentParams, userId: number) {
@@ -21,9 +21,19 @@ async function create(card: CreatePaymentParams, userId: number) {
   });
 }
 
+async function findModalities() {
+  return prisma.modality.findMany();
+}
+
+async function findAccommodations() {
+  return prisma.accommodation.findMany();
+}
+
 const paymentRepository = {
-  create,
-  findFirst
+ create,
+  findFirst,
+  findModalities,
+  findAccommodations,
 };
 
 export default paymentRepository;
