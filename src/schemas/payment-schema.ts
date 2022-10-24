@@ -1,8 +1,12 @@
+import { CreatePaymentParams } from '@/repositories/payment-repository';
 import Joi from 'joi';
-import { CreatePaymentParams } from '@/services/payment-service';
 
 export const paymentSchema = Joi.object<CreatePaymentParams>({
-  cardNumber: Joi.string().pattern(/^[0-9]+$/).required(),
   name: Joi.string().required(),
-  validThru: Joi.string().required()
+  cardNumber: Joi.string()
+    .pattern(/^[0-9]+$/)
+    .required(),
+  expirationDate: Joi.string().required(),
+  cvv: Joi.string().min(3).max(3).required(),
+  totalValue: Joi.string().required()
 });
