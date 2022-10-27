@@ -100,14 +100,14 @@ model Accommodation {
 }
 
 model Ticket {
-  id              Int            @id @default(autoincrement())
-  userId          Int            @unique
-  User            User           @relation(fields: [userId], references: [id])
-  modality        String
-  modalityPrice Float
-  accommodation   String
+  id                 Int      @id @default(autoincrement())
+  userId             Int      @unique
+  User               User     @relation(fields: [userId], references: [id])
+  modality           String
+  modalityPrice      Float
+  accommodation      String
   accommodationPrice Float
-  totalValue      Float
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime       @updatedAt
+  totalValue         Float
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 }
