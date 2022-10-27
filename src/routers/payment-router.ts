@@ -1,7 +1,8 @@
-import { checksThePayment, getAccommodations, getModalities, payment } from '@/controllers/payment-controller';
+import { checksThePayment, getAccommodations, getModalities, payment, ticket } from '@/controllers/payment-controller';
 import { authenticateToken, validateBody } from '@/middlewares';
 import { paymentSchema } from '@/schemas';
 import { Router } from 'express';
+import { ticketSchema } from '../schemas/ticket-schema';
 
 const paymentRouter = Router();
 
@@ -10,6 +11,7 @@ paymentRouter
   .get('/modality', getModalities)
   .get('/accommodation', getAccommodations)
   .get('/', checksThePayment)
-  .post('/', validateBody(paymentSchema), payment);
+  .post('/', validateBody(paymentSchema), payment)
+  .post('/ticket', validateBody(ticketSchema), ticket);
 
 export { paymentRouter };

@@ -1,6 +1,6 @@
 import { notFoundError, unauthorizedPayment } from '@/errors';
-import paymentRepository, { CreatePaymentParams } from '@/repositories/payment-repository';
-import { Accommodation, Modality, Payment } from '@prisma/client';
+import paymentRepository, { CreatePaymentParams, CreateTicketParams } from '@/repositories/payment-repository';
+import { Accommodation, Modality, Payment, Ticket } from '@prisma/client';
 
 async function getModalities(): Promise<Modality[]> {
   const modalities = await paymentRepository.findModalities();
@@ -27,11 +27,17 @@ async function payment(paymentData: CreatePaymentParams, userId: number): Promis
   await paymentRepository.create(paymentData, userId);
 }
 
+async function ticket(ticketData: CreateTicketParams, userId: number): Promise<Ticket> {
+  const ticket = await paymentRepository.createTicket(ticketData, userId);
+  return ticket;
+}
+
 const paymentService = {
   checksThePayment,
   getModalities,
   getAccommodations,
   payment,
+  ticket,
 };
 
 export default paymentService;
