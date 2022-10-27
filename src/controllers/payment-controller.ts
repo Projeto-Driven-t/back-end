@@ -29,3 +29,12 @@ export async function payment(req: AuthenticatedRequest, res: Response) {
 
   return res.status(httpStatus.OK).send('ok');
 }
+
+export async function ticket(req: AuthenticatedRequest, res: Response) {
+  const ticketData = req.body;
+  const { userId } = req;
+
+  const ticket = await paymentService.ticket(ticketData, userId);
+
+  return res.status(httpStatus.OK).send(ticket);
+}
