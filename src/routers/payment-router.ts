@@ -1,4 +1,11 @@
-import { checksThePayment, getAccommodations, getModalities, payment, ticket } from '@/controllers/payment-controller';
+import {
+  checksThePayment,
+  getAccommodations,
+  getModalities,
+  payment,
+  ticket,
+  getTicket,
+} from '@/controllers/payment-controller';
 import { authenticateToken, validateBody } from '@/middlewares';
 import { paymentSchema } from '@/schemas';
 import { Router } from 'express';
@@ -12,6 +19,7 @@ paymentRouter
   .get('/accommodation', getAccommodations)
   .get('/', checksThePayment)
   .post('/', validateBody(paymentSchema), payment)
-  .post('/ticket', validateBody(ticketSchema), ticket);
+  .post('/ticket', validateBody(ticketSchema), ticket)
+  .get('/ticket', getTicket);
 
 export { paymentRouter };

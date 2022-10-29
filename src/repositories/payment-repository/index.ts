@@ -27,6 +27,12 @@ async function createTicket(ticket: CreateTicketParams, userId: number) {
   });
 }
 
+async function findTicket(userId: number) {
+  return prisma.ticket.findFirst({
+    where: { userId },
+  });
+}
+
 export type CreatePaymentParams = Omit<Payment, 'id' | 'userId' | 'createdAt' | 'updatedAt'>;
 export type CreateTicketParams = Omit<Ticket, 'id' | 'userId' | 'createdAt' | 'updatedAt'>;
 
@@ -36,6 +42,7 @@ const paymentRepository = {
   findFirst,
   findModalities,
   findAccommodations,
+  findTicket,
 };
 
 export default paymentRepository;
