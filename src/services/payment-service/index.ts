@@ -32,12 +32,18 @@ async function ticket(ticketData: CreateTicketParams, userId: number): Promise<T
   return ticket;
 }
 
+async function getTicket(userId: number): Promise<Ticket> {
+  const ticket = await paymentRepository.findTicket(userId);
+  return ticket;
+}
+
 const paymentService = {
   checksThePayment,
   getModalities,
   getAccommodations,
   payment,
   ticket,
+  getTicket,
 };
 
 export default paymentService;
