@@ -118,6 +118,8 @@ model Hotel {
   name      String
   roomTypes String
   imageUrl  String
+  totalRooms Int
+  vacancies Int
   Room      Room[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
