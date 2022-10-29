@@ -16,9 +16,9 @@ export async function getAccommodations(req: AuthenticatedRequest, res: Response
 export async function checksThePayment(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
 
-  await paymentService.checksThePayment(userId);
+  const foundPayment = await paymentService.checksThePayment(userId);
 
-  return res.status(httpStatus.OK).send('ok');
+  return res.status(httpStatus.OK).send(foundPayment);
 }
 
 export async function payment(req: AuthenticatedRequest, res: Response) {
@@ -35,6 +35,14 @@ export async function ticket(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
 
   const ticket = await paymentService.ticket(ticketData, userId);
+
+  return res.status(httpStatus.OK).send(ticket);
+}
+
+export async function getTicket(req: AuthenticatedRequest, res: Response) {
+  const { userId } = req;
+
+  const ticket = await paymentService.getTicket(userId);
 
   return res.status(httpStatus.OK).send(ticket);
 }
