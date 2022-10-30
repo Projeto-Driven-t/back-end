@@ -28,20 +28,52 @@ async function main() {
     });
   }
 
-  let accommodation = await prisma.accommodation.findFirst();
+  let accommodation = await prisma.accommodation.findMany();
 
-  if(!accommodation) {
+  if (!accommodation) {
     await prisma.accommodation.create({
-      data: {accommodation: "Com Hotel", price: 500}
-    })
+      data: { accommodation: 'Com Hotel', price: 500 },
+    });
 
     await prisma.accommodation.create({
-      data: {accommodation: "Sem Hotel", price: 0}
-    })
+      data: { accommodation: 'Sem Hotel', price: 0 },
+    });
+  }
+
+  let hotels = await prisma.hotel.findMany();
+
+  if (!hotels) {
+    await prisma.hotel.create({
+      data: {
+        id: 1,
+        name: 'Driven Resort',
+        roomTypes: 'Single e Double',
+        imageUrl: 'https://media-cdn.tripadvisor.com/media/photo-s/16/1a/ea/54/hotel-presidente-4s.jpg',
+      },
+    });
+    await prisma.hotel.create({
+      data: {
+        id: 2,
+        name: 'Driven Palace',
+        roomTypes: 'Single, Double e Triple',
+        imageUrl: 'https://www.ahstatic.com/photos/5451_ho_00_p_1024x768.jpg',
+      },
+    });
+    await prisma.hotel.create({
+      data: {
+        id: 3,
+        name: 'Driven World',
+        roomTypes: 'Single, Double e Triple',
+        imageUrl:
+          'https://imgcy.trivago.com/c_fill,d_dummy.jpeg,e_sharpen:60,f_auto,h_627,q_auto,w_1200/itemimages/96/95/96959_v6.jpeg',
+      },
+    });
   }
 
   console.log({ event });
   console.log({ modality });
+  console.log({ accommodation });
+  console.log({ hotels });
 }
 
 main()
