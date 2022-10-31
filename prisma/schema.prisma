@@ -114,21 +114,22 @@ model Ticket {
 }
 
 model Hotel {
-  id        Int      @id @default(autoincrement())
+  id        Int         @id @default(autoincrement())
   name      String
   roomTypes String
   imageUrl  String
   vacancies Int?
   Room      Room[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  HotelRoom HotelRoom[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
 }
 
 model Room {
   id                 Int         @id @default(autoincrement())
   type               String
   number             String
-  hotelId            Int         
+  hotelId            Int
   Hotel              Hotel       @relation(fields: [hotelId], references: [id])
   maxVacancies       Int
   availableVacancies Int
@@ -143,6 +144,10 @@ model HotelRoom {
   User      User     @relation(fields: [userId], references: [id])
   roomId    Int
   Room      Room     @relation(fields: [roomId], references: [id])
+  hotelId   Int
+  Hotel     Hotel    @relation(fields: [hotelId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([userId, roomId])
 }

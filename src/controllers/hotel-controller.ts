@@ -14,6 +14,24 @@ export async function getHotelById(req: AuthenticatedRequest, res: Response) {
   return res.status(httpStatus.OK).send(hotel);
 }
 
+export async function bookHotel(req: AuthenticatedRequest, res: Response) {
+  const hosting = req.body;
+  const { userId } = req;
+
+  await hotelService.bookHotel(hosting, userId);
+
+  return res.status(httpStatus.OK).send('ok');
+}
+
+export async function updateRoom(req: AuthenticatedRequest, res: Response) {
+  const roomData = req.body;
+  const { userId } = req;
+
+  await hotelService.updateRoom(roomData, userId);
+
+  return res.status(httpStatus.OK).send('ok');
+}
+
 const hotelController = {
   getHotels,
   getHotelById,
