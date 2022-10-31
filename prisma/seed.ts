@@ -104,10 +104,450 @@ async function main() {
     ];
   }
 
+  let rooms = await prisma.room.findMany();
+
+  if (rooms.length === 0) {
+    rooms = [
+      await prisma.room.create({
+        data: {
+          id: 1,
+          hotelId: 1,
+          type: 'Single',
+          number: '1',
+          maxVacancies: 1,
+          availableVacancies: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 2,
+          hotelId: 1,
+          type: 'Double',
+          number: '2',
+          maxVacancies: 2,
+          availableVacancies: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 3,
+          hotelId: 1,
+          type: 'Double',
+          number: '3',
+          maxVacancies: 2,
+          availableVacancies: 0,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 4,
+          hotelId: 1,
+          number: '4',
+          type: 'Single',
+          maxVacancies: 1,
+          availableVacancies: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 5,
+          hotelId: 1,
+          type: 'Double',
+          number: '5',
+          maxVacancies: 2,
+          availableVacancies: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 6,
+          hotelId: 1,
+          type: 'Triple',
+          number: '6',
+          maxVacancies: 2,
+          availableVacancies: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 7,
+          hotelId: 1,
+          number: '7',
+          type: 'Single',
+          maxVacancies: 1,
+          availableVacancies: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 8,
+          hotelId: 1,
+          type: 'Double',
+          number: '8',
+          maxVacancies: 2,
+          availableVacancies: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 9,
+          hotelId: 1,
+          type: 'Single',
+          number: '9',
+          maxVacancies: 1,
+          availableVacancies: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 10,
+          hotelId: 1,
+          type: 'Double',
+          number: '10',
+          maxVacancies: 2,
+          availableVacancies: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 11,
+          hotelId: 1,
+          type: 'Double',
+          number: '11',
+          maxVacancies: 2,
+          availableVacancies: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 12,
+          hotelId: 1,
+          number: '12',
+          type: 'Single',
+          maxVacancies: 1,
+          availableVacancies: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 13,
+          hotelId: 2,
+          type: 'Single',
+          number: '1',
+          maxVacancies: 1,
+          availableVacancies: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 14,
+          hotelId: 2,
+          type: 'Double',
+          number: '2',
+          maxVacancies: 2,
+          availableVacancies: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 15,
+          hotelId: 2,
+          type: 'Triple',
+          number: '3',
+          maxVacancies: 3,
+          availableVacancies: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 16,
+          hotelId: 2,
+          number: '4',
+          type: 'Single',
+          maxVacancies: 1,
+          availableVacancies: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 17,
+          hotelId: 2,
+          type: 'Double',
+          number: '5',
+          maxVacancies: 2,
+          availableVacancies: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 18,
+          hotelId: 2,
+          type: 'Triple',
+          number: '6',
+          maxVacancies: 3,
+          availableVacancies: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 19,
+          hotelId: 2,
+          number: '7',
+          type: 'Single',
+          maxVacancies: 1,
+          availableVacancies: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 20,
+          hotelId: 2,
+          type: 'Double',
+          number: '8',
+          maxVacancies: 2,
+          availableVacancies: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 21,
+          hotelId: 2,
+          type: 'Single',
+          number: '9',
+          maxVacancies: 1,
+          availableVacancies: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 22,
+          hotelId: 2,
+          type: 'Double',
+          number: '10',
+          maxVacancies: 2,
+          availableVacancies: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 23,
+          hotelId: 2,
+          type: 'Triple',
+          number: '11',
+          maxVacancies: 3,
+          availableVacancies: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 24,
+          hotelId: 2,
+          number: '12',
+          type: 'Single',
+          maxVacancies: 1,
+          availableVacancies: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 25,
+          hotelId: 3,
+          type: 'Single',
+          number: '1',
+          maxVacancies: 1,
+          availableVacancies: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 26,
+          hotelId: 3,
+          type: 'Double',
+          number: '2',
+          maxVacancies: 2,
+          availableVacancies: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 27,
+          hotelId: 3,
+          type: 'Triple',
+          number: '3',
+          maxVacancies: 3,
+          availableVacancies: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 28,
+          hotelId: 3,
+          number: '4',
+          type: 'Single',
+          maxVacancies: 1,
+          availableVacancies: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 29,
+          hotelId: 3,
+          type: 'Double',
+          number: '5',
+          maxVacancies: 2,
+          availableVacancies: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 30,
+          hotelId: 3,
+          type: 'Triple',
+          number: '6',
+          maxVacancies: 3,
+          availableVacancies: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 31,
+          hotelId: 3,
+          number: '7',
+          type: 'Single',
+          maxVacancies: 1,
+          availableVacancies: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 32,
+          hotelId: 3,
+          type: 'Double',
+          number: '8',
+          maxVacancies: 2,
+          availableVacancies: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 33,
+          hotelId: 3,
+          type: 'Single',
+          number: '9',
+          maxVacancies: 1,
+          availableVacancies: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 34,
+          hotelId: 3,
+          type: 'Double',
+          number: '10',
+          maxVacancies: 2,
+          availableVacancies: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 35,
+          hotelId: 3,
+          type: 'Triple',
+          number: '11',
+          maxVacancies: 3,
+          availableVacancies: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+      await prisma.room.create({
+        data: {
+          id: 36,
+          hotelId: 3,
+          number: '12',
+          type: 'Single',
+          maxVacancies: 1,
+          availableVacancies: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }),
+    ];
+  }
+
   console.log({ event });
   console.log(modality);
   console.log(accommodation);
   console.log(hotels);
+  console.log(rooms);
 }
 
 main()
