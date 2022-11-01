@@ -1,6 +1,5 @@
 import { prisma } from '@/config';
 import { Hotel, HotelRoom, Room } from '@prisma/client';
-import { type } from 'os';
 
 async function findHotels() {
   const hotels = await prisma.hotel.findMany({
@@ -25,7 +24,7 @@ async function findHotels() {
 
     hotels[i].vacancies = roomCount._sum.availableVacancies;
   }
-  console.log(hotels);
+
   return hotels;
 }
 
