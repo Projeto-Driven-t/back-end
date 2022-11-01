@@ -5,7 +5,11 @@ import { type } from 'os';
 async function findHotels() {
   const hotels = await prisma.hotel.findMany({
     include: {
-      Room: true,
+      Room: {
+        orderBy: {
+          id: 'asc',
+        },
+      },
     },
   });
 
@@ -21,6 +25,7 @@ async function findHotels() {
 
     hotels[i].vacancies = roomCount._sum.availableVacancies;
   }
+  console.log(hotels);
   return hotels;
 }
 
