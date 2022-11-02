@@ -33,7 +33,17 @@ async function updateRoom(roomData: UpdateRoomParams, userId: number) {
   await hotelRepository.updateRoom(roomData, roomId);
 }
 
+async function deleteReservation(userId: number): Promise<void> {
+  const bookedHotel = await hotelRepository.findBookedHotel(userId);
+  const { id } = bookedHotel;
+
+  if (!bookHotel) throw notFoundError();
+
+  await hotelRepository.deleteReservation(id);
+}
+
 const hotelService = {
+  deleteReservation,
   getHotels,
   getHotelById,
   bookHotel,
