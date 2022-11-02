@@ -32,6 +32,14 @@ export async function updateRoom(req: AuthenticatedRequest, res: Response) {
   return res.status(httpStatus.OK).send('ok');
 }
 
+export async function deleteReservation(req: AuthenticatedRequest, res: Response) {
+  const { userId } = req;
+
+  await hotelService.deleteReservation(userId);
+
+  return res.status(httpStatus.OK).send('Deleted hotel reservation');
+}
+
 const hotelController = {
   getHotels,
   getHotelById,
