@@ -55,10 +55,15 @@ async function updateRoom(room: UpdateRoomParams, roomId: number) {
   });
 }
 
+async function deleteReservation(id: number) {
+  return await prisma.hotelRoom.delete({ where: { id } });
+}
+
 export type CreateHotelParams = Omit<HotelRoom, 'id' | 'userId' | 'createdAt' | 'updatedAt'>;
 export type UpdateRoomParams = Omit<Room, 'id' | 'createdAt'>;
 
 const hotelRepository = {
+  deleteReservation,
   findHotels,
   findHotelById,
   findBookedHotel,
