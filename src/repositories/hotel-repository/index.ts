@@ -1,6 +1,5 @@
 import { prisma } from '@/config';
 import { Hotel, HotelRoom, Room } from '@prisma/client';
-import { type } from 'os';
 
 async function findHotels() {
   const hotels = await prisma.hotel.findMany({
@@ -25,7 +24,7 @@ async function findHotels() {
 
     hotels[i].vacancies = roomCount._sum.availableVacancies;
   }
-  console.log(hotels);
+
   return hotels;
 }
 
@@ -56,10 +55,15 @@ async function updateRoom(room: UpdateRoomParams, roomId: number) {
   });
 }
 
+async function deleteReservation(id: number) {
+  return await prisma.hotelRoom.delete({ where: { id } });
+}
+
 export type CreateHotelParams = Omit<HotelRoom, 'id' | 'userId' | 'createdAt' | 'updatedAt'>;
 export type UpdateRoomParams = Omit<Room, 'id' | 'createdAt'>;
 
 const hotelRepository = {
+  deleteReservation,
   findHotels,
   findHotelById,
   findBookedHotel,
