@@ -1,4 +1,4 @@
-import hotelController, { bookHotel, updateRoom } from '@/controllers/hotel-controller';
+import hotelController, { bookHotel, deleteReservation, updateRoom } from '@/controllers/hotel-controller';
 
 import { authenticateToken, validateBody } from '@/middlewares';
 import { hotelSchema, roomSchema } from '@/schemas';
@@ -12,6 +12,7 @@ hotelRouter
   .get('/', hotelController.getHotels)
   .get('/:id', hotelController.getHotelById)
   .post('/', validateBody(hotelSchema), bookHotel)
-  .put('/', validateBody(roomSchema), updateRoom);
+  .put('/', validateBody(roomSchema), updateRoom)
+  .delete('/', deleteReservation);
 
 export { hotelRouter };
