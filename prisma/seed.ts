@@ -543,6 +543,145 @@ async function main() {
     ];
   }
 
+  let activities = await prisma.activities.findMany();
+
+  if(activities.length === 0){
+
+    activities = [
+      await prisma.activities.create({
+      data:{
+        id: 1,
+        name: "Minecraft: Montando o PC ideal",
+        place: "Auditório Principal",
+        date: new Date("2022-11-18"),
+        startAt: "09:00",
+        endsAt: "10:00"
+      }
+    }),
+
+    await prisma.activities.create({
+      data:{
+        id: 2,
+        name: "LoL: Montando o PC ideal",
+        place: "Auditório Principal",
+        date: new Date("2022-11-18"),
+        startAt: "10:00",
+        endsAt: "11:00"
+      }
+    }),
+
+    await prisma.activities.create({
+      data:{
+        id: 3,
+        name: "Valorant: Montando o PC ideal",
+        place: "Auditório Lateral",
+        date: new Date("2022-11-18"),
+        startAt: "09:00",
+        endsAt: "11:00"
+      }
+    }),
+
+    await prisma.activities.create({
+      data:{
+        id: 4,
+        name: "Fifa: Montando o PC ideal",
+        place: "Sala de Workshop",
+        date: new Date("2022-11-18"),
+        startAt: "09:00",
+        endsAt: "10:00"
+      }
+    }),
+
+    await prisma.activities.create({
+      data:{
+        id: 5,
+        name: "Genshin Impact: Montando o PC ideal",
+        place: "Sala de Workshop",
+        date: new Date("2022-11-18"),
+        startAt: "10:00",
+        endsAt: "11:00"
+      }
+    }),
+
+    await prisma.activities.create({
+      data:{
+        id: 6,
+        name: "Minecraft: Derrotando o Ender Dragon",
+        place: "Auditório Principal",
+        date: new Date("2022-11-19"),
+        startAt: "09:00",
+        endsAt: "12:00"
+      }
+    }),
+
+    await prisma.activities.create({
+      data:{
+        id: 7,
+        name: "Genshin Impact: Derrotando o Oceanid",
+        place: "Auditório Lateral",
+        date: new Date("2022-11-19"),
+        startAt: "9:00",
+        endsAt: "12:00"
+      }
+    }),
+
+    await prisma.activities.create({
+      data:{
+        id: 8,
+        name: "Valorant: Chegando no Platina",
+        place: "Sala de Workshop",
+        date: new Date("2022-11-19"),
+        startAt: "09:00",
+        endsAt: "12:00"
+      }
+    }),
+
+    await prisma.activities.create({
+      data:{
+        id: 9,
+        name: "Conseguindo o CR7 no Fifa",
+        place: "Auditório Principal",
+        date: new Date("2022-11-20"),
+        startAt: "09:00",
+        endsAt: "11:00"
+      }
+    }),
+
+    await prisma.activities.create({
+      data:{
+        id: 10,
+        name: "Como limpar o PC",
+        place: "Auditório Lateral",
+        date: new Date("2022-11-20"),
+        startAt: "9:00",
+        endsAt: "10:00"
+      }
+    }),
+
+    await prisma.activities.create({
+      data:{
+        id: 11,
+        name: "Como vencer no FallGuys",
+        place: "Sala de Workshop",
+        date: new Date("2022-11-20"),
+        startAt: "09:00",
+        endsAt: "12:00"
+      }
+    }),
+
+    await prisma.activities.create({
+      data:{
+        id: 12,
+        name: "Como virar streamer - com Allanzoka",
+        place: "Auditório Lateral",
+        date: new Date("2022-11-20"),
+        startAt: "10:00",
+        endsAt: "12:00"
+      }
+    }),
+  ]
+  }
+
   console.log({ event });
   console.log(modality);
   console.log(accommodation);
