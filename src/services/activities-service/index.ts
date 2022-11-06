@@ -1,15 +1,15 @@
-import { conflictError, notFoundError } from '@/errors';
-import { Activities } from '@prisma/client';
+import { notFoundError } from '@/errors';
+import { Activity, DayActivities } from '@prisma/client';
 import { activitiesRepository } from '@/repositories/activities-repository';
 
-async function getActivities(): Promise<Activities[]> {
+async function getActivities(): Promise<DayActivities[]> {
   const activities = await activitiesRepository.findActivities();
   if (!activities) throw notFoundError();
 
   return activities;
 }
 
-async function getActivitiesById(id: number): Promise<Activities> {
+async function getActivitiesById(id: number): Promise<Activity> {
   const activity = await activitiesRepository.findActivityById(id);
   if (!activity) throw notFoundError();
 
