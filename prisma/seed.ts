@@ -546,24 +546,96 @@ async function main() {
   let daysActivities = await prisma.dayActivities.findMany();
 
   if (daysActivities.length === 0) {
-    await prisma.dayActivities.create({
-      data: {
-        id: 1,
-        date: new Date('2022-11-18'),
-      },
-    });
-    await prisma.dayActivities.create({
-      data: {
-        id: 2,
-        date: new Date('2022-11-19'),
-      },
-    });
-    await prisma.dayActivities.create({
-      data: {
-        id: 3,
-        date: new Date('2022-11-20'),
-      },
-    });
+    daysActivities = [
+      await prisma.dayActivities.create({
+        data: {
+          id: 1,
+          date: new Date('2022-11-18'),
+        },
+      }),
+      await prisma.dayActivities.create({
+        data: {
+          id: 2,
+          date: new Date('2022-11-19'),
+        },
+      }),
+      await prisma.dayActivities.create({
+        data: {
+          id: 3,
+          date: new Date('2022-11-20'),
+        },
+      }),
+    ];
+  }
+
+  let places = await prisma.place.findMany();
+
+  if (places.length === 0) {
+    places = [
+      await prisma.place.create({
+        data: {
+          id: 1,
+          name: 'Auditório Principal',
+          dayActivitiesId: 1,
+        },
+      }),
+      await prisma.place.create({
+        data: {
+          id: 2,
+          name: 'Auditório Lateral',
+          dayActivitiesId: 1,
+        },
+      }),
+      await prisma.place.create({
+        data: {
+          id: 3,
+          name: 'Sala de Workshop',
+          dayActivitiesId: 1,
+        },
+      }),
+      await prisma.place.create({
+        data: {
+          id: 4,
+          name: 'Auditório Principal',
+          dayActivitiesId: 2,
+        },
+      }),
+      await prisma.place.create({
+        data: {
+          id: 5,
+          name: 'Auditório Lateral',
+          dayActivitiesId: 2,
+        },
+      }),
+      await prisma.place.create({
+        data: {
+          id: 6,
+          name: 'Sala de Workshop',
+          dayActivitiesId: 2,
+        },
+      }),
+      await prisma.place.create({
+        data: {
+          id: 7,
+          name: 'Auditório Principal',
+          dayActivitiesId: 3,
+        },
+      }),
+      await prisma.place.create({
+        data: {
+          id: 8,
+          name: 'Auditório Lateral',
+          dayActivitiesId: 3,
+        },
+      }),
+      await prisma.place.create({
+        data: {
+          id: 9,
+          name: 'Sala de Workshop',
+          dayActivitiesId: 3,
+        },
+      }),
+    ];
   }
 
   let activities = await prisma.activity.findMany();
@@ -574,11 +646,10 @@ async function main() {
         data: {
           id: 1,
           name: 'Minecraft: Montando o PC ideal',
-          place: 'Auditório Principal',
           startAt: '09:00',
           endsAt: '10:00',
           vacancies: 50,
-          dayActivitiesId: 1,
+          placeId: 1,
         },
       }),
 
@@ -586,11 +657,10 @@ async function main() {
         data: {
           id: 2,
           name: 'LoL: Montando o PC ideal',
-          place: 'Auditório Principal',
           startAt: '10:00',
           endsAt: '11:30',
           vacancies: 0,
-          dayActivitiesId: 1,
+          placeId: 1,
         },
       }),
 
@@ -598,11 +668,10 @@ async function main() {
         data: {
           id: 3,
           name: 'Valorant: Montando o PC ideal',
-          place: 'Auditório Lateral',
           startAt: '09:00',
           endsAt: '11:00',
           vacancies: 50,
-          dayActivitiesId: 1,
+          placeId: 2,
         },
       }),
 
@@ -610,11 +679,10 @@ async function main() {
         data: {
           id: 4,
           name: 'Fifa: Montando o PC ideal',
-          place: 'Sala de Workshop',
           startAt: '09:00',
           endsAt: '10:00',
           vacancies: 50,
-          dayActivitiesId: 1,
+          placeId: 3,
         },
       }),
 
@@ -622,11 +690,10 @@ async function main() {
         data: {
           id: 5,
           name: 'Genshin Impact: Montando o PC ideal',
-          place: 'Sala de Workshop',
           startAt: '10:00',
           endsAt: '11:00',
           vacancies: 50,
-          dayActivitiesId: 1,
+          placeId: 3,
         },
       }),
 
@@ -634,11 +701,10 @@ async function main() {
         data: {
           id: 6,
           name: 'Minecraft: Derrotando o Ender Dragon',
-          place: 'Auditório Principal',
           startAt: '09:00',
           endsAt: '12:00',
           vacancies: 50,
-          dayActivitiesId: 2,
+          placeId: 4,
         },
       }),
 
@@ -646,11 +712,10 @@ async function main() {
         data: {
           id: 7,
           name: 'Genshin Impact: Derrotando o Oceanid',
-          place: 'Auditório Lateral',
           startAt: '9:00',
           endsAt: '12:30',
           vacancies: 50,
-          dayActivitiesId: 2,
+          placeId: 5,
         },
       }),
 
@@ -658,11 +723,10 @@ async function main() {
         data: {
           id: 8,
           name: 'Valorant: Chegando no Platina',
-          place: 'Sala de Workshop',
           startAt: '09:00',
           endsAt: '12:00',
           vacancies: 0,
-          dayActivitiesId: 2,
+          placeId: 6,
         },
       }),
 
@@ -670,11 +734,10 @@ async function main() {
         data: {
           id: 9,
           name: 'Conseguindo o CR7 no Fifa',
-          place: 'Auditório Principal',
-          startAt: '09:00',
-          endsAt: '11:00',
+          startAt: '14:00',
+          endsAt: '17:00',
           vacancies: 50,
-          dayActivitiesId: 3,
+          placeId: 7,
         },
       }),
 
@@ -682,11 +745,10 @@ async function main() {
         data: {
           id: 10,
           name: 'Como limpar o PC',
-          place: 'Auditório Lateral',
           startAt: '9:00',
           endsAt: '10:20',
           vacancies: 50,
-          dayActivitiesId: 3,
+          placeId: 7,
         },
       }),
 
@@ -694,11 +756,10 @@ async function main() {
         data: {
           id: 11,
           name: 'Como vencer no FallGuys',
-          place: 'Sala de Workshop',
           startAt: '09:00',
           endsAt: '12:00',
           vacancies: 50,
-          dayActivitiesId: 3,
+          placeId: 8,
         },
       }),
 
@@ -706,11 +767,10 @@ async function main() {
         data: {
           id: 12,
           name: 'Como virar streamer - com Allanzoka',
-          place: 'Auditório Lateral',
-          startAt: '10:00',
+          startAt: '10:30',
           endsAt: '12:00',
           vacancies: 0,
-          dayActivitiesId: 3,
+          placeId: 9,
         },
       }),
     ];
@@ -722,6 +782,7 @@ async function main() {
   console.log(hotels);
   console.log(rooms);
   console.log(daysActivities);
+  console.log(places);
   console.log(activities);
 }
 
