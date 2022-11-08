@@ -1,19 +1,28 @@
 import { prisma } from '@/config';
-import { Activities } from '@prisma/client';
 
 async function findActivities() {
-  // group activities by date
-  const activities = await prisma.activities.findMany();
+  const activities = await prisma.dayActivities.findMany({
+    include: {
+      Place: {
+        orderBy: {
+          id: 'asc',
+        },
+        include: {
+          Activity: true,
+        },
+      },
+    },
+  });
 
   return activities;
 }
 
 async function findActivityById(id: number) {
-  return await prisma.activities.findUnique({ where: { id } });
+  return await prisma.activity.findUnique({ where: { id } });
 }
 
 async function findActivityByName(name: string) {
-  return await prisma.activities.findUnique({ where: { name } });
+  return await prisma.activity.findUnique({ where: { name } });
 }
 
 export const activitiesRepository = {
