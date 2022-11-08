@@ -152,23 +152,32 @@ model HotelRoom {
 }
 
 model DayActivities {
-  id        Int        @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   date      DateTime
-  Activity  Activity[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  Place     Place[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Place {
+  id              Int           @id @default(autoincrement())
+  name            String
+  dayActivitiesId Int
+  DayActivies     DayActivities @relation(fields: [dayActivitiesId], references: [id])
+  Activity        Activity[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
 }
 
 model Activity {
-  id              Int              @id @default(autoincrement())
-  name            String           @unique
-  place           String
-  startAt         String
-  endsAt          String
-  vacancies       Int?
-  dayActivitiesId Int
-  DayActivities   DayActivities    @relation(fields: [dayActivitiesId], references: [id])
-  UserActivities  UserActivities[]
+  id             Int              @id @default(autoincrement())
+  name           String           @unique
+  startAt        String
+  endsAt         String
+  vacancies      Int
+  placeId        Int
+  Place          Place            @relation(fields: [placeId], references: [id])
+  UserActivities UserActivities[]
 }
 
 model UserActivities {
