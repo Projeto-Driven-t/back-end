@@ -3,7 +3,14 @@ import { prisma } from '@/config';
 async function findActivities() {
   const activities = await prisma.dayActivities.findMany({
     include: {
-      Activity: true,
+      Place: {
+        orderBy: {
+          id: 'asc',
+        },
+        include: {
+          Activity: true,
+        },
+      },
     },
   });
 
